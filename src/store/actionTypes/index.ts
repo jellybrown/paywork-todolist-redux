@@ -3,9 +3,6 @@ import { ActionType } from "../types/index";
 
 export interface LoadTodoRequestAction {
   type: ActionType.LOAD_TODO_REQUEST;
-  payload: {
-    url: string;
-  };
 }
 
 export interface LoadTodoSuceessAction {
@@ -23,7 +20,6 @@ export interface LoadTodoFailureAction {
 export interface AddTodoRequestAction {
   type: ActionType.ADD_TODO_REQUEST;
   payload: {
-    url: string;
     content: string;
   };
 }

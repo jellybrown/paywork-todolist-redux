@@ -1,9 +1,5 @@
 import { Itodo } from "./../../types";
-import {
-  AddTodoRequestAction,
-  // loadTodoRequest,
-  LoadTodoRequestAction,
-} from "../actionTypes/index";
+import { AddTodoRequestAction } from "../actionTypes/index";
 import { api, CreateResponse, PostObj, ReadResponse } from "../../api/api";
 import {
   fork,
@@ -14,17 +10,13 @@ import {
   takeLatest,
   takeEvery,
 } from "redux-saga/effects";
-
 import { ActionType } from "../types";
 
-export function* loadTodo({ payload }: LoadTodoRequestAction) {
+const TODO_URL = "/todo";
+
+export function* loadTodo() {
   try {
-    const result: ReadResponse = yield call(api.get, payload.url);
-    // const result = {
-    //   status: 200,
-    //   count: 2,
-    //   todoList: fakeData,
-    // };
+    const result: ReadResponse = yield call(api.get, TODO_URL);
     yield put({ type: ActionType.LOAD_TODO_SUCCESS, payload: result });
   } catch {
     yield put({ type: ActionType.LOAD_TODO_FAILURE });
@@ -34,7 +26,8 @@ export function* loadTodo({ payload }: LoadTodoRequestAction) {
 export function* addTodo({ payload }: AddTodoRequestAction) {
   let data: Itodo;
   try {
-    const result: CreateResponse = yield call(api.post, payload);
+    const obj = { url: TODO_URL, content: payload.content };
+    const result: CreateResponse = yield call(api.post, obj);
 
     yield (data = {
       id: "aaa",
