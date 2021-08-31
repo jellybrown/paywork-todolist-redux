@@ -11,14 +11,14 @@ import { ActionRequest } from "../actions";
 interface TodoState {
   loading: boolean;
   error: boolean;
-  todos: Itodo[];
+  todoList: Itodo[];
   count: number;
 }
 
 const initialState: TodoState = {
   loading: false,
   error: false,
-  todos: [],
+  todoList: [],
   count: 0,
 };
 
@@ -34,9 +34,8 @@ const reducer = (
       case ActionType.LOAD_TODO_SUCCESS:
         draft.loading = false;
         console.log("여기는 reducer", action);
-        const LoadAction = action as LoadTodoSuceessAction;
-        draft.count = LoadAction.payload.count;
-        draft.todos = LoadAction.payload.todos;
+        draft.count = action.payload.count;
+        draft.todoList = action.payload.todoList;
         break;
       case ActionType.LOAD_TODO_FAILURE:
         draft.loading = false;
@@ -47,8 +46,7 @@ const reducer = (
         break;
       case ActionType.ADD_TODO_SUCCESS:
         draft.loading = false;
-        const AddAction = action as AddTodoSuccessAction;
-        draft.todos?.push(AddAction.payload);
+        draft.todoList.push(action.payload);
         break;
       default:
         break;

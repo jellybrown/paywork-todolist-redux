@@ -1,13 +1,7 @@
 import {
-  addTodoFailure,
-  addTodoRequest,
   AddTodoRequestAction,
-  addTodoSuceess,
-  loadTodoFailure,
   // loadTodoRequest,
   LoadTodoRequestAction,
-  loadTodoSuceess,
-  LoadTodoSuceessAction,
 } from "./../actions/index";
 import { api, CreateResponse, PostObj, ReadResponse } from "../../api/api";
 import {
@@ -22,56 +16,26 @@ import {
 
 import { ActionType } from "../types";
 
-// loadTodo({type: 'ss', data:'/todo' });
-
-interface Action<T> {
-  data: T;
-}
-
-function getAPI(url: string) {
-  return api.get(url);
-}
-
-const fakeData = [
-  {
-    id: "string",
-    content: "string",
-    isCheck: true,
-    createdAt: "2021-05-26T11:51:05.097Z",
-  },
-  {
-    id: "string",
-    content: "string",
-    isCheck: true,
-    createdAt: "2021-05-26T11:51:05.097Z",
-  },
-];
-
 export function* loadTodo({ payload }: LoadTodoRequestAction) {
   try {
-    console.log("pp-->>", payload);
-    // const result: ReadResponse = yield call(getAPI, payload);
-    const result = {
-      status: 200,
-      count: 2,
-      todoList: fakeData,
-    };
-    console.log("re", result);
-    yield put({ type: ActionType.ADD_TODO_SUCCESS, payload: result });
-    //yield put(loadTodoSuceess(result));
-    console.log("여기");
+    const result: ReadResponse = yield call(api.get, payload.url);
+    // const result = {
+    //   status: 200,
+    //   count: 2,
+    //   todoList: fakeData,
+    // };
+    yield put({ type: ActionType.LOAD_TODO_SUCCESS, payload: result });
   } catch {
-    yield put({ type: ActionType.ADD_TODO_FAILURE });
-    console.log("errro");
+    yield put({ type: ActionType.LOAD_TODO_FAILURE });
   }
 }
 
 export function* addTodo(action: AddTodoRequestAction) {
   try {
     const result: CreateResponse = yield call(api.post, action.payload);
-    yield put(addTodoSuceess(result));
+    yield put({ type: ActionType.ADD_TODO_SUCCESS });
   } catch {
-    yield put(addTodoFailure());
+    yield put({ type: ActionType.ADD_TODO_FAILURE });
   }
 }
 
@@ -80,7 +44,7 @@ export function* watchLoadTodo() {
 }
 
 export function* watchAddTodo() {
-  yield takeLatest(addTodoRequest, addTodo);
+  //  yield takeLatest(addTodoRequest, addTodo);
 }
 
 export default function* todosSaga() {
