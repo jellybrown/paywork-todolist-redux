@@ -31,6 +31,7 @@ export interface AddTodoSuccessAction {
     content: string;
     isCheck: boolean;
     createdAt: string;
+    updatedAt: string;
   };
 }
 

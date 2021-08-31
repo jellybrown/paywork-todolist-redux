@@ -2,16 +2,25 @@
   "count": 2,
   "todoList": [
     {
-      "id": "string",
-      "content": "string",
+      "id": "34543",
+      "content": "으으으",
       "isCheck": true,
-      "createdAt": "2021-05-26T11:51:05.097Z"
+      "createdAt": "2021-05-26T11:51:05.097Z",
+      "updatedAt": "2021-05-26T11:51:05.097Z"
     },
     {
-      "id": "string",
-      "content": "string",
+      "id": "aa3243",
+      "content": "안녕하하하",
       "isCheck": false,
-      "createdAt": "2021-05-26T16:15:25.729Z"
+      "createdAt": "2021-05-26T16:15:25.729Z",
+      "updatedAt": "2021-05-26T11:51:05.097Z"
+    },
+    {
+      "id": "434gf",
+      "content": "아아아아ㅏㅇ",
+      "isCheck": false,
+      "createdAt": "2021-05-26T16:15:25.729Z",
+      "updatedAt": "2021-05-26T11:51:05.097Z"
     }
   ]
 }

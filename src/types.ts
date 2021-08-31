@@ -3,4 +3,5 @@ export interface Itodo {
   content: string;
   isCheck: boolean;
   createdAt: string;
+  updatedAt: string;
 }
