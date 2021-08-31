@@ -1,8 +1,9 @@
+import { Itodo } from "./../../types";
 import {
   AddTodoRequestAction,
   // loadTodoRequest,
   LoadTodoRequestAction,
-} from "./../actions/index";
+} from "../actionTypes/index";
 import { api, CreateResponse, PostObj, ReadResponse } from "../../api/api";
 import {
   fork,
@@ -30,10 +31,19 @@ export function* loadTodo({ payload }: LoadTodoRequestAction) {
   }
 }
 
-export function* addTodo(action: AddTodoRequestAction) {
+export function* addTodo({ payload }: AddTodoRequestAction) {
+  let data: Itodo;
   try {
-    const result: CreateResponse = yield call(api.post, action.payload);
-    yield put({ type: ActionType.ADD_TODO_SUCCESS });
+    const result: CreateResponse = yield call(api.post, payload);
+
+    yield (data = {
+      id: "aaa",
+      content: result.msg,
+      isCheck: false,
+      createdAt: "2201101010",
+    });
+
+    yield put({ type: ActionType.ADD_TODO_SUCCESS, payload: data });
   } catch {
     yield put({ type: ActionType.ADD_TODO_FAILURE });
   }
@@ -44,7 +54,7 @@ export function* watchLoadTodo() {
 }
 
 export function* watchAddTodo() {
-  //  yield takeLatest(addTodoRequest, addTodo);
+  yield takeLatest(ActionType.ADD_TODO_REQUEST, addTodo);
 }
 
 export default function* todosSaga() {

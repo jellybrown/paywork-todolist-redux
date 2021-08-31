@@ -2,11 +2,11 @@ import { Itodo } from "../../types";
 import {
   AddTodoSuccessAction,
   LoadTodoSuceessAction,
-} from "./../actions/index";
+} from "../actionTypes/index";
 import { ActionType } from "../types/index";
 
 import produce from "immer";
-import { ActionRequest } from "../actions";
+import { ActionRequest } from "../actionTypes";
 
 interface TodoState {
   loading: boolean;
@@ -33,7 +33,6 @@ const reducer = (
         break;
       case ActionType.LOAD_TODO_SUCCESS:
         draft.loading = false;
-        console.log("여기는 reducer", action);
         draft.count = action.payload.count;
         draft.todoList = action.payload.todoList;
         break;
@@ -47,6 +46,10 @@ const reducer = (
       case ActionType.ADD_TODO_SUCCESS:
         draft.loading = false;
         draft.todoList.push(action.payload);
+        break;
+      case ActionType.ADD_TODO_FAILURE:
+        draft.loading = false;
+        draft.error = true;
         break;
       default:
         break;

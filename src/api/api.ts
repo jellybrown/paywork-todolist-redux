@@ -26,28 +26,28 @@ export interface ReadResponse {
 //   };
 // };
 
-const get = async (url: string) => {
-  const getUrl = await url;
-  const response = {
-    status: 200,
-    count: fakeData.count,
-    todoList: fakeData.todoList,
-  };
-  console.log("응답", response);
-  return response;
-};
-
-// const get = (url: string): Promise<ReadResponse> => {
-//   return new Promise((resolve, reject) => {
-//     if (url)
-//       return resolve({
-//         status: 200,
-//         count: fakeData.count,
-//         todoList: fakeData.todoList,
-//       });
-//     else return reject(new Error("url을 입력해주세요."));
-//   });
+// const get = async (url: string) => {
+//   const getUrl = await url;
+//   const response = {
+//     status: 200,
+//     count: fakeData.count,
+//     todoList: fakeData.todoList,
+//   };
+//   console.log("응답", response);
+//   return response;
 // };
+
+const get = (url: string): Promise<ReadResponse> => {
+  return new Promise((resolve, reject) => {
+    if (url)
+      return resolve({
+        status: 200,
+        count: fakeData.count,
+        todoList: fakeData.todoList,
+      });
+    else return reject(new Error("url을 입력해주세요."));
+  });
+};
 
 export interface PostObj {
   url: string;
