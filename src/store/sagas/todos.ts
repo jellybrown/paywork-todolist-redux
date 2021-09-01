@@ -55,7 +55,7 @@ export function* addTodo({ payload }: AddTodoRequestAction) {
 // delete 요청이 들어오면 실행될 함수
 export function* deleteTodo({ payload }: DeleteTodoRequestAction) {
   try {
-    const obj = { url: TODO_URL, id: payload.id };
+    const obj = { url: `${TODO_URL}/${payload.id}`, id: payload.id };
     const result: DeleteResponse = yield call(api.remove, obj);
     yield put({
       type: ActionType.DELETE_TODO_SUCCESS,
@@ -71,7 +71,11 @@ export function* updateContentTodo({
   payload,
 }: UpdateContentTodoRequestAction) {
   try {
-    const obj = { url: TODO_URL, content: payload.content, id: payload.id };
+    const obj = {
+      url: `${TODO_URL}/${payload.id}`,
+      content: payload.content,
+      id: payload.id,
+    };
     const result: UpdateContentResponse = yield call(api.patchContent, obj);
     yield put({
       type: ActionType.UPDATE_CONTENT_TODO_SUCCESS,
@@ -85,7 +89,11 @@ export function* updateContentTodo({
 // update check 요청이 들어오면 실행될 함수
 export function* updateCheckTodo({ payload }: UpdateCheckTodoRequestAction) {
   try {
-    const obj = { url: TODO_URL, isCheck: payload.isCheck, id: payload.id };
+    const obj = {
+      url: `${TODO_URL}/${payload.id}`,
+      isCheck: payload.isCheck,
+      id: payload.id,
+    };
     const result: UpdateCheckResponse = yield call(api.patchCheck, obj);
     yield put({
       type: ActionType.UPDATE_CHECK_TODO_SUCCESS,
