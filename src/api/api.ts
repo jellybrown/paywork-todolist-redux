@@ -31,6 +31,7 @@ export interface UpdateCheckResponse extends UpdateBaseResponse {
 export interface DeleteResponse {
   status: number;
   msg: string;
+  id: string;
 }
 
 export type ContentObj = {
@@ -40,6 +41,10 @@ export type ContentObj = {
 export type CheckObj = {
   url: string;
   isCheck: boolean;
+};
+export type IdObj = {
+  url: string;
+  id: string;
 };
 
 // GET /todo
@@ -102,9 +107,14 @@ const patchCheck = (obj: CheckObj): Promise<UpdateCheckResponse> => {
 };
 
 // DELETE /todo/:id
-const remove = (url: string): Promise<DeleteResponse> => {
+const remove = (obj: IdObj): Promise<DeleteResponse> => {
   return new Promise((resolve, reject) => {
-    if (url) return resolve({ status: 200, msg: "포스트가 삭제되었습니다." });
+    if (obj.url)
+      return resolve({
+        status: 200,
+        msg: "포스트가 삭제되었습니다.",
+        id: obj.id,
+      });
     else return reject(new Error("url이 있는지 확인해주세요."));
   });
 };

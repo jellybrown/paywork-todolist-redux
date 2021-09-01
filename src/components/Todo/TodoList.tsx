@@ -1,9 +1,16 @@
 import React from "react";
+import { useSelector } from "react-redux";
+import { RootType } from "../../store/reducers";
+import TodoItem from "./TodoItem";
 
 const TodoList = () => {
+  const { todoList } = useSelector((state: RootType) => state.todos);
+
   return (
     <ul>
-      <li>투투두두</li>
+      {todoList.map((item) => (
+        <TodoItem key={item.id} data={item} />
+      ))}
     </ul>
   );
 };

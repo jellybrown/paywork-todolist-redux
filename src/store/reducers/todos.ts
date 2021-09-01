@@ -1,8 +1,4 @@
 import { Itodo } from "../../types";
-import {
-  AddTodoSuccessAction,
-  LoadTodoSuceessAction,
-} from "../actionTypes/index";
 import { ActionType } from "../types/index";
 
 import produce from "immer";
@@ -45,9 +41,23 @@ const reducer = (
         break;
       case ActionType.ADD_TODO_SUCCESS:
         draft.loading = false;
-        draft.todoList.push(action.payload);
+        draft.todoList.push(action.payload as Itodo);
         break;
       case ActionType.ADD_TODO_FAILURE:
+        draft.loading = false;
+        draft.error = true;
+        break;
+      case ActionType.DELETE_TODO_REQUEST:
+        draft.loading = true;
+        break;
+      case ActionType.DELETE_TODO_SUCCESS:
+        draft.loading = false;
+        const updatedList = draft.todoList.filter(
+          (todo) => todo.id !== action.payload.id
+        );
+        draft.todoList = updatedList;
+        break;
+      case ActionType.DELETE_TODO_FAILURE:
         draft.loading = false;
         draft.error = true;
         break;
