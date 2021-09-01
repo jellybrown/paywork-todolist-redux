@@ -67,8 +67,8 @@ const reducer = (
         draft.loading = true;
         break;
       case ActionType.UPDATE_CONTENT_TODO_SUCCESS:
-        draft.loading = false;
         {
+          draft.loading = false;
           const updatedList = draft.todoList.map((todo) => {
             if (todo.id === action.payload.id) {
               todo.content = action.payload.content;
@@ -87,8 +87,8 @@ const reducer = (
         draft.loading = true;
         break;
       case ActionType.UPDATE_CHECK_TODO_SUCCESS:
-        draft.loading = false;
         {
+          draft.loading = false;
           const updatedList = draft.todoList.map((todo) => {
             if (todo.id === action.payload.id) {
               todo.isCheck = action.payload.isCheck;
