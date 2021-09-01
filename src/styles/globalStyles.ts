@@ -6,10 +6,10 @@ const GlobalStyle = createGlobalStyle`
 
   html,
   body {
-    overflow: hidden;
     min-height: 100vh;
     font-size: 14px;
     background-color: #39529C;
+    font-family: 'Nanum Gothic', sans-serif;
   }
 
   * {
