@@ -9,7 +9,7 @@
 ## 사용 기술
 
 - react, typescript
-- redux, redux-saga
+- redux, redux-saga : 상태관리, 비동기통신
 
 <br>
 
@@ -18,6 +18,12 @@
 - [x] 생성: 모달로 구현
 - [x] 수정: check 선택,해제 / 내용 수정
 - [x] 삭제
+
+<br>
+
+## 링크
+
+https://ecstatic-hawking-1f2cb1.netlify.app/
 
 <br>
 
