@@ -13,16 +13,7 @@ import {
   UpdateContentResponse,
   UpdateCheckResponse,
 } from "../../api/api";
-import {
-  fork,
-  all,
-  delay,
-  call,
-  put,
-  takeLatest,
-  takeEvery,
-  debounce,
-} from "redux-saga/effects";
+import { fork, all, call, put, takeLatest, debounce } from "redux-saga/effects";
 import { ActionType } from "../types";
 import { generateData } from "../../utils";
 

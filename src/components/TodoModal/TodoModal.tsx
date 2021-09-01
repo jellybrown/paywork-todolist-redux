@@ -48,4 +48,4 @@ const TodoModal = ({ opened, closeModal }: TodoModalProps) => {
   );
 };
 
-export default TodoModal;
+export default React.memo(TodoModal);

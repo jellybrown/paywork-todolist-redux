@@ -92,4 +92,4 @@ const TodoItem = ({ data, isPink }: TodoItemProps) => {
   );
 };
 
-export default TodoItem;
+export default React.memo(TodoItem);

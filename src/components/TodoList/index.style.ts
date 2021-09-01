@@ -113,7 +113,7 @@ export const DeleteButton = styled.button<{ isEditMode: boolean }>`
   position: absolute;
   background: none;
   border: none;
-  right: 20px;
+  right: 30px;
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;

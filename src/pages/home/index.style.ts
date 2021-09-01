@@ -8,6 +8,16 @@ export const HomeWrapper = styled.section`
   position: relative;
 `;
 
+export const Header = styled.header`
+  padding: 40px;
+  > span {
+    color: #fff;
+    opacity: 0.4;
+    font-size: 16px;
+    font-weight: bold;
+  }
+`;
+
 export const AddButton = styled.button`
   background: #132c75;
   border: none;
