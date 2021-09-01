@@ -12,6 +12,15 @@ const GlobalStyle = createGlobalStyle`
     font-family: 'Nanum Gothic', sans-serif;
   }
 
+  body {
+    -ms-overflow-style: none; 
+    ::-webkit-scrollbar { 
+      display: none; 
+    }
+
+
+  }
+
   * {
     box-sizing: border-box;
   }

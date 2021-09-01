@@ -18,7 +18,7 @@ const Home = () => {
   }, [dispatch]);
 
   return (
-    <HomeWrapper>
+    <HomeWrapper opened={opened}>
       <Header>
         <span>{time}</span>
       </Header>
