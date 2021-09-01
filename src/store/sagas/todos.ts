@@ -1,8 +1,18 @@
 import { DeleteResponse } from "./../../api/api";
-import { DeleteTodoRequestAction } from "./../actionTypes/index";
 import { Itodo } from "./../../types";
-import { AddTodoRequestAction } from "../actionTypes/index";
-import { api, CreateResponse, ReadResponse } from "../../api/api";
+import {
+  AddTodoRequestAction,
+  UpdateContentTodoRequestAction,
+  DeleteTodoRequestAction,
+  UpdateCheckTodoRequestAction,
+} from "../actionTypes/index";
+import {
+  api,
+  CreateResponse,
+  ReadResponse,
+  UpdateContentResponse,
+  UpdateCheckResponse,
+} from "../../api/api";
 import {
   fork,
   all,
@@ -11,6 +21,7 @@ import {
   put,
   takeLatest,
   takeEvery,
+  debounce,
 } from "redux-saga/effects";
 import { ActionType } from "../types";
 import { generateData } from "../../utils";
@@ -41,6 +52,7 @@ export function* addTodo({ payload }: AddTodoRequestAction) {
   }
 }
 
+// delete 요청이 들어오면 실행될 함수
 export function* deleteTodo({ payload }: DeleteTodoRequestAction) {
   try {
     const obj = { url: TODO_URL, id: payload.id };
@@ -51,6 +63,36 @@ export function* deleteTodo({ payload }: DeleteTodoRequestAction) {
     });
   } catch {
     yield put({ type: ActionType.DELETE_TODO_FAILURE });
+  }
+}
+
+// update content 요청이 들어오면 실행될 함수
+export function* updateContentTodo({
+  payload,
+}: UpdateContentTodoRequestAction) {
+  try {
+    const obj = { url: TODO_URL, content: payload.content, id: payload.id };
+    const result: UpdateContentResponse = yield call(api.patchContent, obj);
+    yield put({
+      type: ActionType.UPDATE_CONTENT_TODO_SUCCESS,
+      payload: { id: result.id, content: result.content },
+    });
+  } catch {
+    yield put({ type: ActionType.UPDATE_CONTENT_TODO_FAILURE });
+  }
+}
+
+// update check 요청이 들어오면 실행될 함수
+export function* updateCheckTodo({ payload }: UpdateCheckTodoRequestAction) {
+  try {
+    const obj = { url: TODO_URL, isCheck: payload.isCheck, id: payload.id };
+    const result: UpdateCheckResponse = yield call(api.patchCheck, obj);
+    yield put({
+      type: ActionType.UPDATE_CHECK_TODO_SUCCESS,
+      payload: { id: result.id, isCheck: result.isCheck },
+    });
+  } catch {
+    yield put({ type: ActionType.UPDATE_CHECK_TODO_FAILURE });
   }
 }
 
@@ -67,6 +109,24 @@ export function* watchDeleteTodo() {
   yield takeLatest(ActionType.DELETE_TODO_REQUEST, deleteTodo);
 }
 
+export function* watchUpdateContentTodo() {
+  yield debounce(
+    700,
+    ActionType.UPDATE_CONTENT_TODO_REQUEST,
+    updateContentTodo
+  );
+}
+
+export function* watchUpdateCheckTodo() {
+  yield takeLatest(ActionType.UPDATE_CHECK_TODO_REQUEST, updateCheckTodo);
+}
+
 export default function* todosSaga() {
-  yield all([fork(watchLoadTodo), fork(watchAddTodo), fork(watchDeleteTodo)]);
+  yield all([
+    fork(watchLoadTodo),
+    fork(watchAddTodo),
+    fork(watchDeleteTodo),
+    fork(watchUpdateContentTodo),
+    fork(watchUpdateCheckTodo),
+  ]);
 }

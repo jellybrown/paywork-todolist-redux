@@ -2,6 +2,8 @@ import {
   LoadTodoRequestAction,
   AddTodoRequestAction,
   DeleteTodoRequestAction,
+  UpdateContentTodoRequestAction,
+  UpdateCheckTodoRequestAction,
 } from "./../actionTypes";
 import { ActionType } from "./../types/index";
 
@@ -30,6 +32,42 @@ export const deleteTodoRequest = (id: string): DeleteTodoRequestAction => {
     type: ActionType.DELETE_TODO_REQUEST,
     payload: {
       id,
+    },
+  };
+};
+
+type UpdateContentInfo = {
+  id: string;
+  content: string;
+};
+
+// update content 요청을 위한 함수
+export const updateContentTodoRequest = (
+  todo: UpdateContentInfo
+): UpdateContentTodoRequestAction => {
+  return {
+    type: ActionType.UPDATE_CONTENT_TODO_REQUEST,
+    payload: {
+      id: todo.id,
+      content: todo.content,
+    },
+  };
+};
+
+type UpdateCheckInfo = {
+  id: string;
+  isCheck: boolean;
+};
+
+// update check 요청을 위한 함수
+export const updateCheckTodoRequest = (
+  todo: UpdateCheckInfo
+): UpdateCheckTodoRequestAction => {
+  return {
+    type: ActionType.UPDATE_CHECK_TODO_REQUEST,
+    payload: {
+      id: todo.id,
+      isCheck: todo.isCheck,
     },
   };
 };

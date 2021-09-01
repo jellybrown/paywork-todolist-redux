@@ -60,6 +60,49 @@ export interface DeleteTodoFailureAction {
   type: ActionType.DELETE_TODO_FAILURE;
 }
 
+// update content
+export interface UpdateContentTodoRequestAction {
+  type: ActionType.UPDATE_CONTENT_TODO_REQUEST;
+  payload: {
+    id: string;
+    content: string;
+  };
+}
+
+export interface UpdateContentTodoSuccessAction {
+  type: ActionType.UPDATE_CONTENT_TODO_SUCCESS;
+  payload: {
+    id: string;
+    content: string;
+  };
+}
+
+export interface UpdateContentTodoFailureAction {
+  type: ActionType.UPDATE_CONTENT_TODO_FAILURE;
+}
+
+// udate check
+export interface UpdateCheckTodoRequestAction {
+  type: ActionType.UPDATE_CHECK_TODO_REQUEST;
+  payload: {
+    id: string;
+    isCheck: boolean;
+  };
+}
+
+export interface UpdateCheckTodoSuccessAction {
+  type: ActionType.UPDATE_CHECK_TODO_SUCCESS;
+  payload: {
+    id: string;
+    isCheck: boolean;
+  };
+}
+
+export interface UpdateCheckTodoFailureAction {
+  type: ActionType.UPDATE_CHECK_TODO_FAILURE;
+}
+
+// all action request
 export type ActionRequest =
   | LoadTodoRequestAction
   | LoadTodoSuceessAction
@@ -69,4 +112,10 @@ export type ActionRequest =
   | AddTodoFailureAction
   | DeleteTodoRequestAction
   | DeleteTodoSuccessAction
-  | DeleteTodoFailureAction;
+  | DeleteTodoFailureAction
+  | UpdateContentTodoRequestAction
+  | UpdateContentTodoSuccessAction
+  | UpdateContentTodoFailureAction
+  | UpdateCheckTodoRequestAction
+  | UpdateCheckTodoSuccessAction
+  | UpdateCheckTodoFailureAction;

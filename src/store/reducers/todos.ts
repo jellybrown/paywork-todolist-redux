@@ -1,6 +1,5 @@
 import { Itodo } from "../../types";
 import { ActionType } from "../types/index";
-
 import produce from "immer";
 import { ActionRequest } from "../actionTypes";
 
@@ -51,13 +50,53 @@ const reducer = (
         draft.loading = true;
         break;
       case ActionType.DELETE_TODO_SUCCESS:
-        draft.loading = false;
-        const updatedList = draft.todoList.filter(
-          (todo) => todo.id !== action.payload.id
-        );
-        draft.todoList = updatedList;
+        {
+          draft.loading = false;
+          const updatedList = draft.todoList.filter(
+            (todo) => todo.id !== action.payload.id
+          );
+          draft.todoList = updatedList;
+        }
         break;
       case ActionType.DELETE_TODO_FAILURE:
+        draft.loading = false;
+        draft.error = true;
+        break;
+      case ActionType.UPDATE_CONTENT_TODO_REQUEST:
+        draft.loading = true;
+        break;
+      case ActionType.UPDATE_CONTENT_TODO_SUCCESS:
+        draft.loading = false;
+        {
+          const updatedList = draft.todoList.map((todo) => {
+            if (todo.id === action.payload.id) {
+              todo.content = action.payload.content;
+              return todo;
+            } else return todo;
+          });
+          draft.todoList = updatedList;
+        }
+        break;
+      case ActionType.UPDATE_CONTENT_TODO_FAILURE:
+        draft.loading = false;
+        draft.error = true;
+        break;
+      case ActionType.UPDATE_CHECK_TODO_REQUEST:
+        draft.loading = true;
+        break;
+      case ActionType.UPDATE_CHECK_TODO_SUCCESS:
+        draft.loading = false;
+        {
+          const updatedList = draft.todoList.map((todo) => {
+            if (todo.id === action.payload.id) {
+              todo.isCheck = action.payload.isCheck;
+              return todo;
+            } else return todo;
+          });
+          draft.todoList = updatedList;
+        }
+        break;
+      case ActionType.UPDATE_CHECK_TODO_FAILURE:
         draft.loading = false;
         draft.error = true;
         break;

@@ -22,6 +22,24 @@ export const Item = styled.li`
   position: relative;
 `;
 
+export const EditInput = styled.input<{ isCheck: boolean }>`
+  z-index: 3;
+  background-color: #081b52;
+  color: rgba(255, 255, 255, 0.8);
+  border: none;
+  outline: none;
+  padding: 25px 0px;
+  margin: 0 60px;
+  position: absolute;
+  left: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: calc(100% - 130px);
+  border-radius: inherit;
+  opacity: ${({ isCheck }) => (isCheck ? "0" : "1")};
+  visibility: ${({ isCheck }) => (isCheck ? "hidden" : "visible")};
+`;
+
 export const CheckBox = styled.input`
   position: absolute;
   left: -9999%;
@@ -30,13 +48,17 @@ export const CheckBox = styled.input`
 interface CheckProps {
   isCheck: boolean;
   isPink: boolean;
+  isEditMode: boolean;
 }
 
 export const Label = styled.label<CheckProps>`
-  color: rgba(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.4);
   position: relative;
   cursor: pointer;
   transition: 0.2s;
+  opacity: ${({ isEditMode }) => (isEditMode ? "0" : "1")};
+  visibility: ${({ isEditMode }) => (isEditMode ? "hidden" : "visible")};
+  padding: 8px 0;
 
   &:before {
     position: absolute;
@@ -54,9 +76,20 @@ export const Label = styled.label<CheckProps>`
         ? `url(${PinkCircle})`
         : `url(${BlueCircle})`};
   }
+
+  &:after {
+    position: absolute;
+    content: "";
+    left: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 100%;
+    height: 1px;
+    background-color: rgba(255, 255, 255, 0.4);
+  }
 `;
 
-export const DeleteButton = styled.button`
+export const DeleteButton = styled.button<{ isEditMode: boolean }>`
   width: 20px;
   height: 20px;
   position: absolute;
@@ -66,7 +99,8 @@ export const DeleteButton = styled.button`
   top: 50%;
   transform: translateY(-50%);
   cursor: pointer;
-  opacity: 0.2;
+  opacity: ${({ isEditMode }) => (isEditMode ? "0" : "0.2")};
+  visibility: ${({ isEditMode }) => (isEditMode ? "hidden" : "visible")};
   transition: 0.2s;
 
   > img {

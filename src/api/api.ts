@@ -18,6 +18,7 @@ export interface ReadResponse {
 interface UpdateBaseResponse {
   status: number;
   msg: string;
+  id: string;
 }
 
 export interface UpdateContentResponse extends UpdateBaseResponse {
@@ -34,13 +35,20 @@ export interface DeleteResponse {
   id: string;
 }
 
+export type CreateObj = {
+  url: string;
+  content: string;
+};
+
 export type ContentObj = {
   url: string;
   content: string;
+  id: string;
 };
 export type CheckObj = {
   url: string;
   isCheck: boolean;
+  id: string;
 };
 export type IdObj = {
   url: string;
@@ -61,7 +69,7 @@ const get = (url: string): Promise<ReadResponse> => {
 };
 
 // POST /todo
-const post = (obj: ContentObj): Promise<CreateResponse> => {
+const post = (obj: CreateObj): Promise<CreateResponse> => {
   return new Promise((resolve, reject) => {
     if (obj.url && obj.content)
       return resolve({
@@ -81,6 +89,7 @@ const patchContent = (obj: ContentObj): Promise<UpdateContentResponse> => {
         status: 200,
         msg: "포스트가 수정되었습니다.",
         content: obj.content,
+        id: obj.id,
       });
     else return reject(new Error("url, content가 있는지 확인해주세요."));
   });
@@ -89,19 +98,12 @@ const patchContent = (obj: ContentObj): Promise<UpdateContentResponse> => {
 // PATCH /todo/:id
 const patchCheck = (obj: CheckObj): Promise<UpdateCheckResponse> => {
   return new Promise((resolve, reject) => {
-    if (obj.url && obj.isCheck) {
+    if (obj.url) {
       let msg: string;
-      let isCheck: boolean;
+      if (obj.isCheck === true) msg = "체크가 완료되었습니다.";
+      else msg = "체크가 해제되었습니다.";
 
-      if (obj.isCheck === true) {
-        msg = "체크가 해제되었습니다.";
-        isCheck = false;
-      } else {
-        msg = "체크가 완료되었습니다.";
-        isCheck = true;
-      }
-
-      return resolve({ status: 200, msg, isCheck });
+      return resolve({ status: 200, msg, isCheck: obj.isCheck, id: obj.id });
     } else return reject(new Error("url, isCheck가 있는지 확인해주세요."));
   });
 };
