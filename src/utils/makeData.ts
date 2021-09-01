@@ -9,8 +9,10 @@ const randomId = (): string => {
 // 날짜 생성 함수 (KST)
 export const updateDate = (): string => {
   const KR_TIME_ZONE = 9 * 60 * 60 * 1000;
-  const date = new Date(Date.now() + KR_TIME_ZONE);
-  return `${date}`;
+  const today = new Date(Date.now() + KR_TIME_ZONE);
+  const dateString = today.toISOString();
+
+  return dateString;
 };
 
 // todo data 생성 함수
