@@ -21,6 +21,14 @@
 
 <br>
 
+## 사용법
+
+- `git clone https://github.com/jellybrown/paywork-todolist-redux.git`
+- `npm install`
+- `npm run start`
+
+<br>
+
 ## 링크
 
 https://ecstatic-hawking-1f2cb1.netlify.app/
