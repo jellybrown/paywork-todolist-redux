@@ -11,7 +11,7 @@ export const ModalWrapper = styled.section<{ opened: boolean }>`
   background: rgba(0, 0, 0, 0.6);
   z-index: 10;
   overflow: hidden;
-  transition-delay: ${({ opened }) => (opened ? "0" : "0.5s")};
+  transition-delay: ${({ opened }) => (opened ? "0" : "0.4s")};
 `;
 
 export const ModalBox = styled.div<{ opened: boolean }>`

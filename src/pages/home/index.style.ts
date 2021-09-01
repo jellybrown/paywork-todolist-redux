@@ -8,7 +8,7 @@ export const HomeWrapper = styled.section<{ opened: boolean }>`
   position: relative;
   height: ${({ opened }) => (opened ? "100vh" : "auto")};
   overflow: ${({ opened }) => (opened ? "hidden" : "auto")};
-  padding: 40px;
+  padding: 40px 0 80px;
 `;
 
 export const Header = styled.header`
