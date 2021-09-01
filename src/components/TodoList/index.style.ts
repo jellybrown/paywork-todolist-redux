@@ -3,8 +3,25 @@ import CheckCircle from "assets/icon/check-circle.svg";
 import PinkCircle from "assets/icon/pink-circle.svg";
 import BlueCircle from "assets/icon/blue-circle.svg";
 
+const LEFT_MARGIN = "72px";
+
+export const ListHeader = styled.div`
+  width: 80%;
+  max-width: 800px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 25px;
+  color: rgba(255, 255, 255, 0.3);
+
+  > h2 {
+    font-size: 14px;
+  }
+`;
+
 export const List = styled.ul`
   width: 80%;
+  max-width: 800px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -14,9 +31,9 @@ export const List = styled.ul`
 export const Item = styled.li`
   background-color: #081b52;
   width: 100%;
-  padding: 25px 60px;
-  margin: 4px 20px;
-  border-radius: 18px;
+  padding: 25px ${LEFT_MARGIN};
+  margin: 8px 20px;
+  border-radius: 27px;
   display: flex;
   align-items: center;
   position: relative;
@@ -29,9 +46,9 @@ export const EditInput = styled.input<{ isCheck: boolean }>`
   border: none;
   outline: none;
   padding: 25px 0px;
-  margin: 0 60px;
+  margin: 0 ${LEFT_MARGIN};
   position: absolute;
-  left: 0;
+  left: 0px;
   top: 50%;
   transform: translateY(-50%);
   width: calc(100% - 130px);
@@ -66,9 +83,10 @@ export const Label = styled.label<CheckProps>`
     left: -40px;
     top: 50%;
     transform: translateY(-50%);
-    width: 30px;
-    height: 30px;
+    width: 27px;
+    height: 27px;
     transition: 0.2s;
+    background-size: cover;
     background-image: ${({ isCheck, isPink }) =>
       isCheck
         ? `url(${CheckCircle})`
@@ -110,6 +128,7 @@ export const DeleteButton = styled.button<{ isEditMode: boolean }>`
     top: 50%;
     transform: translateY(-50%);
   }
+
   &:hover {
     opacity: 0.7;
   }

@@ -1,26 +1,8 @@
-import React, { useCallback, useEffect, useState } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import TodoList from "components/TodoList";
-import { useDispatch } from "react-redux";
-import { loadTodoRequest } from "store/actionCreators";
-import TodoCreate from "components/TodoCreate";
+import React from "react";
+import Home from "pages/home";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(loadTodoRequest());
-  }, [dispatch]);
-
-  return (
-    <div
-      style={{ display: "flex", flexDirection: "column", alignItems: "center" }}
-    >
-      <TodoCreate />
-      <TodoList />
-    </div>
-  );
+  return <Home />;
 }
 
 export default App;

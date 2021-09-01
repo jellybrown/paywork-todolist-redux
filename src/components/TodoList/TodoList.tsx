@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { RootType } from "store/reducers";
-import { List } from "./index.style";
+import { List, ListHeader } from "./index.style";
 import TodoItem from "./TodoItem";
 
 const TodoList = () => {
@@ -14,7 +14,10 @@ const TodoList = () => {
 
   return (
     <>
-      <h2>TODAY'S TASK</h2>
+      <ListHeader>
+        <h2>오늘의 할일</h2>
+        <span>{todoList.length} 개</span>
+      </ListHeader>
       <List>
         {todoList.map((item, i) => (
           <TodoItem key={item.id} data={item} isPink={checkPink(i)} />

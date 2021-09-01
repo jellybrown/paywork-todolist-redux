@@ -1,5 +1,5 @@
 import React, { useCallback, useEffect, useRef, useState } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import {
   deleteTodoRequest,
   updateCheckTodoRequest,
@@ -8,8 +8,6 @@ import {
 import { Itodo } from "../../types";
 import { CheckBox, DeleteButton, EditInput, Item, Label } from "./index.style";
 import TrashIcon from "assets/icon/trash.svg";
-import { updateCheckTodo } from "store/sagas/todos";
-import { RootType } from "store/reducers";
 
 interface TodoItemProps {
   data: Itodo;
@@ -22,6 +20,11 @@ const TodoItem = ({ data, isPink }: TodoItemProps) => {
   const editRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
 
+  // todo 체크(혹은 해제)시 상태 변경을 위한 함수
+  const onChangeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setChecked(e.target.checked);
+  };
+
   useEffect(() => {
     const todo = {
       id: data.id,
@@ -30,16 +33,12 @@ const TodoItem = ({ data, isPink }: TodoItemProps) => {
     dispatch(updateCheckTodoRequest(todo));
   }, [dispatch, checked, data.id]);
 
-  // todo 체크(혹은 해제)시 상태 변경을 위한 함수
-  const onChangeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setChecked(e.target.checked);
-  };
-
   // todo 삭제를 위한 함수
   const onDeleteTodo = () => {
     dispatch(deleteTodoRequest(data.id));
   };
 
+  // todo 내용 수정을 위한 함수
   const onEditTodo = useCallback(() => {
     const todo = {
       id: data.id,
@@ -53,6 +52,7 @@ const TodoItem = ({ data, isPink }: TodoItemProps) => {
     onEditTodo();
   }, [isEditMode, onEditTodo]);
 
+  // enter시 edit mode 해제하는 함수
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       editRef.current?.blur();
