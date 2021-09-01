@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { deleteTodoRequest } from "../../store/actionCreators";
+import { deleteTodoRequest } from "store/actionCreators";
 import { Itodo } from "../../types";
+import { CheckBox, DeleteButton, Item, Label } from "./index.style";
+import TrashIcon from "assets/icon/trash.svg";
 
 interface TodoItemProps {
   data: Itodo;
+  isPink: boolean;
 }
-const TodoItem = ({ data }: TodoItemProps) => {
+const TodoItem = ({ data, isPink }: TodoItemProps) => {
   const [checked, setChecked] = useState(data.isCheck);
   const dispatch = useDispatch();
 
@@ -23,15 +26,20 @@ const TodoItem = ({ data }: TodoItemProps) => {
   };
 
   return (
-    <div>
-      <input
+    <Item>
+      <CheckBox
         type="checkbox"
         checked={checked}
         onChange={(e) => onChangeCheck(e)}
+        id={data.id}
       />
-      <label>{data.content}</label>
-      <button onClick={onDeleteTodo}>삭제</button>
-    </div>
+      <Label isPink={isPink} isCheck={checked} htmlFor={data.id}>
+        {data.content}
+      </Label>
+      <DeleteButton onClick={onDeleteTodo}>
+        <img src={TrashIcon} alt="delete button" />
+      </DeleteButton>
+    </Item>
   );
 };
 
