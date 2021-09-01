@@ -1,3 +1,4 @@
+import { updateDate } from "./../../utils/makeData";
 import { Itodo } from "../../types";
 import { ActionType } from "../types/index";
 import produce from "immer";
@@ -71,6 +72,7 @@ const reducer = (
           const updatedList = draft.todoList.map((todo) => {
             if (todo.id === action.payload.id) {
               todo.content = action.payload.content;
+              todo.updatedAt = updateDate();
               return todo;
             } else return todo;
           });
@@ -90,6 +92,7 @@ const reducer = (
           const updatedList = draft.todoList.map((todo) => {
             if (todo.id === action.payload.id) {
               todo.isCheck = action.payload.isCheck;
+              todo.updatedAt = updateDate();
               return todo;
             } else return todo;
           });
