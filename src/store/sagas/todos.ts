@@ -1,4 +1,3 @@
-import { DeleteResponse } from "./../../api/api";
 import { Itodo } from "./../../types";
 import {
   AddTodoRequestAction,
@@ -6,13 +5,14 @@ import {
   DeleteTodoRequestAction,
   UpdateCheckTodoRequestAction,
 } from "../actionTypes/index";
+import { api } from "../../api/api";
 import {
-  api,
   CreateResponse,
+  DeleteResponse,
   ReadResponse,
-  UpdateContentResponse,
   UpdateCheckResponse,
-} from "../../api/api";
+  UpdateContentResponse,
+} from "api/types";
 import { fork, all, call, put, takeLatest, debounce } from "redux-saga/effects";
 import { ActionType } from "../types";
 import { generateData } from "../../utils";

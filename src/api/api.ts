@@ -1,59 +1,17 @@
-import { Itodo } from "../types";
 import fakeData from "./data.json";
+import {
+  RemoveObj,
+  PatchCheckObj,
+  PatchContentObj,
+  CreateObj,
+  DeleteResponse,
+  UpdateCheckResponse,
+  UpdateContentResponse,
+  CreateResponse,
+  ReadResponse,
+} from "./types";
 
 export const BASE_URL = "http://dummy-server.io/";
-
-export interface CreateResponse {
-  status: number;
-  msg: string;
-  content: string;
-}
-
-export interface ReadResponse {
-  status: number;
-  count: number;
-  todoList: Itodo[];
-}
-
-interface UpdateBaseResponse {
-  status: number;
-  msg: string;
-  id: string;
-}
-
-export interface UpdateContentResponse extends UpdateBaseResponse {
-  content: string;
-}
-
-export interface UpdateCheckResponse extends UpdateBaseResponse {
-  isCheck: boolean;
-}
-
-export interface DeleteResponse {
-  status: number;
-  msg: string;
-  id: string;
-}
-
-export type CreateObj = {
-  url: string;
-  content: string;
-};
-
-export type ContentObj = {
-  url: string;
-  content: string;
-  id: string;
-};
-export type CheckObj = {
-  url: string;
-  isCheck: boolean;
-  id: string;
-};
-export type IdObj = {
-  url: string;
-  id: string;
-};
 
 // GET /todo
 const get = (url: string): Promise<ReadResponse> => {
@@ -82,7 +40,7 @@ const post = (obj: CreateObj): Promise<CreateResponse> => {
 };
 
 // PATCH /todo/:id
-const patchContent = (obj: ContentObj): Promise<UpdateContentResponse> => {
+const patchContent = (obj: PatchContentObj): Promise<UpdateContentResponse> => {
   return new Promise((resolve, reject) => {
     if (obj.url && obj.content)
       return resolve({
@@ -96,7 +54,7 @@ const patchContent = (obj: ContentObj): Promise<UpdateContentResponse> => {
 };
 
 // PATCH /todo/:id
-const patchCheck = (obj: CheckObj): Promise<UpdateCheckResponse> => {
+const patchCheck = (obj: PatchCheckObj): Promise<UpdateCheckResponse> => {
   return new Promise((resolve, reject) => {
     if (obj.url) {
       let msg: string;
@@ -109,7 +67,7 @@ const patchCheck = (obj: CheckObj): Promise<UpdateCheckResponse> => {
 };
 
 // DELETE /todo/:id
-const remove = (obj: IdObj): Promise<DeleteResponse> => {
+const remove = (obj: RemoveObj): Promise<DeleteResponse> => {
   return new Promise((resolve, reject) => {
     if (obj.url)
       return resolve({
