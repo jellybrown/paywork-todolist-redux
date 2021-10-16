@@ -1,7 +1,6 @@
 import { Itodo } from "../../types";
 import { ActionType } from "../types/index";
 
-// load
 export interface LoadTodoRequestAction {
   type: ActionType.LOAD_TODO_REQUEST;
 }
@@ -18,7 +17,6 @@ export interface LoadTodoFailureAction {
   type: ActionType.LOAD_TODO_FAILURE;
 }
 
-// add
 export interface AddTodoRequestAction {
   type: ActionType.ADD_TODO_REQUEST;
   payload: {
@@ -41,7 +39,6 @@ export interface AddTodoFailureAction {
   type: ActionType.ADD_TODO_FAILURE;
 }
 
-// delete
 export interface DeleteTodoRequestAction {
   type: ActionType.DELETE_TODO_REQUEST;
   payload: {
@@ -60,7 +57,6 @@ export interface DeleteTodoFailureAction {
   type: ActionType.DELETE_TODO_FAILURE;
 }
 
-// update content
 export interface UpdateContentTodoRequestAction {
   type: ActionType.UPDATE_CONTENT_TODO_REQUEST;
   payload: {
@@ -81,7 +77,6 @@ export interface UpdateContentTodoFailureAction {
   type: ActionType.UPDATE_CONTENT_TODO_FAILURE;
 }
 
-// udate check
 export interface UpdateCheckTodoRequestAction {
   type: ActionType.UPDATE_CHECK_TODO_REQUEST;
   payload: {
@@ -102,7 +97,6 @@ export interface UpdateCheckTodoFailureAction {
   type: ActionType.UPDATE_CHECK_TODO_FAILURE;
 }
 
-// all action request
 export type ActionRequest =
   | LoadTodoRequestAction
   | LoadTodoSuceessAction

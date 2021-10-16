@@ -20,7 +20,6 @@ const TodoItem = ({ data, isPink }: TodoItemProps) => {
   const editRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useDispatch();
 
-  // todo 체크(혹은 해제)시 상태 변경을 위한 함수
   const onChangeCheck = (e: React.ChangeEvent<HTMLInputElement>) => {
     setChecked(e.target.checked);
   };
@@ -33,12 +32,10 @@ const TodoItem = ({ data, isPink }: TodoItemProps) => {
     dispatch(updateCheckTodoRequest(todo));
   }, [dispatch, checked, data.id]);
 
-  // todo 삭제를 위한 함수
   const onDeleteTodo = () => {
     dispatch(deleteTodoRequest(data.id));
   };
 
-  // todo 내용 수정을 위한 함수
   const onEditTodo = useCallback(() => {
     const todo = {
       id: data.id,
@@ -52,7 +49,6 @@ const TodoItem = ({ data, isPink }: TodoItemProps) => {
     onEditTodo();
   }, [isEditMode, onEditTodo]);
 
-  // enter시 edit mode 해제하는 함수
   const onKeyPress = (e: React.KeyboardEvent<HTMLInputElement>) => {
     if (e.key === "Enter") {
       editRef.current?.blur();

@@ -19,7 +19,6 @@ import { generateData } from "../../utils";
 
 const TODO_URL = "/todo";
 
-// load 요청이 들어오면 실행될 함수
 export function* loadTodo() {
   try {
     const result: ReadResponse = yield call(api.get, TODO_URL);
@@ -29,7 +28,6 @@ export function* loadTodo() {
   }
 }
 
-// add 요청이 들어오면 실행될 함수
 export function* addTodo({ payload }: AddTodoRequestAction) {
   let data: Itodo;
   try {
@@ -43,7 +41,6 @@ export function* addTodo({ payload }: AddTodoRequestAction) {
   }
 }
 
-// delete 요청이 들어오면 실행될 함수
 export function* deleteTodo({ payload }: DeleteTodoRequestAction) {
   try {
     const obj = { url: `${TODO_URL}/${payload.id}`, id: payload.id };
@@ -57,7 +54,6 @@ export function* deleteTodo({ payload }: DeleteTodoRequestAction) {
   }
 }
 
-// update content 요청이 들어오면 실행될 함수
 export function* updateContentTodo({
   payload,
 }: UpdateContentTodoRequestAction) {
@@ -77,7 +73,6 @@ export function* updateContentTodo({
   }
 }
 
-// update check 요청이 들어오면 실행될 함수
 export function* updateCheckTodo({ payload }: UpdateCheckTodoRequestAction) {
   try {
     const obj = {
@@ -95,7 +90,6 @@ export function* updateCheckTodo({ payload }: UpdateCheckTodoRequestAction) {
   }
 }
 
-// action을 지켜볼 watch 함수들
 export function* watchLoadTodo() {
   yield takeLatest(ActionType.LOAD_TODO_REQUEST, loadTodo);
 }

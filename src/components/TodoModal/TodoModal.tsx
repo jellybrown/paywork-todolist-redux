@@ -21,7 +21,6 @@ const TodoModal = ({ opened, closeModal }: TodoModalProps) => {
   const dispatch = useDispatch();
   const [input, setInput] = useState<string>("");
 
-  // todo 생성 함수
   const onAddTodo = () => {
     dispatch(addTodoRequest(input));
     setInput("");
